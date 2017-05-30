@@ -1,0 +1,16 @@
+body {
+    background-color: teal;
+    font-family: 'Futura';
+}
+
+.low {
+    color: limegreen;
+}
+
+.medium {
+    color: orange;
+}
+
+.high {
+    color: red;
+}
