@@ -23,7 +23,8 @@ class ToDoListApp extends React.Component {
 		var newToDoList = this.state.toDoList;
 		newToDoList.push({
 			name: newName,
-			priority: newPriority
+			priority: newPriority,
+			completed: false
 		});
 		this.setState({toDoList: newToDoList});
 	}
@@ -61,6 +62,9 @@ class NewToDo extends React.Component {
 
 	handleNewToDo() {
 		this.props.newToDo(this.state.newName, this.state.newPriority);
+		var nameInput = document.getElementsByClassName('new-task__name-input')[0];
+		nameInput.value = "";
+		nameInput.focus();
 	}
 
 	updateName(event) {
@@ -76,7 +80,13 @@ class NewToDo extends React.Component {
 
 function ToDoList(props) {
 	var toDos = props.toDos.map(function(todo, index) {
-		return <div key={index} className={todo.priority}>{todo.name}</div>
+		let classes = todo.priority;
+		if (todo.completed) {
+			classes += " " + "complete";
+		} else {
+			classes += " " + "incomplete";
+		}
+		return <div key={index} className={classes}>{todo.name}</div>
 	});
 	toDos = toDos.reverse();
 	return <div className="todos">{toDos}</div>
