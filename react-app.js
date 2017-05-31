@@ -49,7 +49,7 @@ class NewToDo extends React.Component {
 
 		return(
 			<div className="add-new-task">
-				<input onChange={this.updateName} className="new-task__name-input" type="text" placeholder="Type task here" />
+				<input onChange={this.updateName} className="new-task__name-input" type="text" placeholder="Type task here" value={this.state.newName} />
 				<select onChange={this.updatePriority} className="new-task__priority-dropdown">
 					<option value="high">High</option>
 					<option value="medium">Medium</option>
@@ -62,9 +62,7 @@ class NewToDo extends React.Component {
 
 	handleNewToDo() {
 		this.props.newToDo(this.state.newName, this.state.newPriority);
-		var nameInput = document.getElementsByClassName('new-task__name-input')[0];
-		nameInput.value = "";
-		nameInput.focus();
+		this.setState({newName: ""});
 	}
 
 	updateName(event) {
