@@ -14,7 +14,7 @@ class ToDoListApp extends React.Component {
 			<div>
 				<h1>Welcome to my App!</h1>
 				<NewToDo newToDo={this.addToList}/>
-				<ToDoList toDos={this.state.toDoList} />
+				<ToDoList toDos={this.state.toDoList} toggleComplete={this.toggleComplete} />
 			</div>
 		)
 	}
@@ -27,6 +27,16 @@ class ToDoListApp extends React.Component {
 			completed: false
 		});
 		this.setState({toDoList: newToDoList});
+	}
+
+	toggleComplete(event) {
+		let split = event.target.className.split(" ");
+		let completeClass = split[1];
+		if (completeClass === "complete") {
+			event.target.className = split[0] + " incomplete";
+		} else if (completeClass === "incomplete") {
+			event.target.className = split[0] + " complete";
+		}
 	}
 
 }
@@ -78,13 +88,18 @@ class NewToDo extends React.Component {
 
 function ToDoList(props) {
 	var toDos = props.toDos.map(function(todo, index) {
-		let classes = todo.priority;
+		let checkClass = "checkbox";
 		if (todo.completed) {
-			classes += " " + "complete";
+			checkClass += " complete";
 		} else {
-			classes += " " + "incomplete";
+			checkClass += " incomplete";
 		}
-		return <div key={index} className={classes}>{todo.name}</div>
+		return(
+			<div key={index} className={todo.priority}>
+				{todo.name}
+				<div className={checkClass} onClick={props.toggleComplete}></div>
+			</div>
+		)
 	});
 	toDos = toDos.reverse();
 	return <div className="todos">{toDos}</div>

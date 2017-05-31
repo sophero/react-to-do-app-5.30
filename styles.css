@@ -12,5 +12,19 @@ body {
 }
 
 .high {
-    color: red;
+    color: yellow;
+}
+
+.checkbox {
+    display: inline-block;
+    width: 23px;
+    height: 23px;
+}
+
+.complete {
+    background-color: lightblue;
+}
+
+.incomplete {
+    background-color: darkred;
 }
